@@ -4,7 +4,11 @@ plotly
 seaborn
 matplotlib
 sqlalchemy
+python-dotenv
+
 langchain
 langchain-community
+langchain-experimental
 langchain-groq
-python-dotenv
+
+groq
