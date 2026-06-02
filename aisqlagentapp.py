@@ -18,7 +18,10 @@ api_key = os.getenv("GROQ_API_KEY")
 st.set_page_config(page_title="AI SQL Data Analyst Agent", layout="wide")
 st.title("🤖 AI SQL Data Analyst Agent")
 
-file = st.file_uploader("Upload CSV File")
+file = st.file_uploader(
+    "Upload File",
+    type=["csv", "xlsx"]
+)
 
 if file:
 
