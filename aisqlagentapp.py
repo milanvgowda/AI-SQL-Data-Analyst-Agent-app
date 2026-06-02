@@ -27,10 +27,17 @@ if file:
     df = df.drop_duplicates()
 
     for col in df.columns:
-        if df[col].dtype == "object":
-            df[col] = df[col].fillna("Unknown")
+        if pd.api.types.is_numeric_dtype(df[col]):
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+            median_value = df[col].median()
+            if pd.isna(median_value):
+                df[col] = df[col].fillna(0)
+            else:
+                df[col] = df[col].fillna(median_value)
         else:
-            df[col] = df[col].fillna(df[col].median())
+            df[col] = df[col].astype(str)
+            df[col] = df[col].replace("nan", "Unknown")
+            df[col] = df[col].fillna("Unknown")
 
     st.subheader("📊 Data Preview")
     st.dataframe(df.head())
